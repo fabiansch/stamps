@@ -5,13 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable,
          :omniauthable, :omniauth_providers => [:twitter]
 
-  def self.find_for_twitter_oauth(access_token, signed_in_resource = nil)
-    data = access_token.extra.raw_info
-    if user = User.where(:username => data.screen_name).first
-        user
-    else
-        User.create!(:username => data.screen_name, :password => Devise.friendly_token)
-    end
+  def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0,20]
+      end
   end
 
   def email_required?
