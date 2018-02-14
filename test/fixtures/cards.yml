@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stamps_count: 1
+  name: MyString
+  description: MyString
+  exploited: false
+  company: one
+
+two:
+  stamps_count: 1
+  name: MyString
+  description: MyString
+  exploited: false
+  company: two

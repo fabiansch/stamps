@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @transaction.count %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @transaction.card %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @transaction.user %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
