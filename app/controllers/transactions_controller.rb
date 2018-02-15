@@ -26,6 +26,10 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
 
+    @transaction.count.times do
+      Stamp.create(card: @transaction.card, user: @transaction.user)
+    end
+
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }

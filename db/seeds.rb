@@ -1,5 +1,6 @@
 
-user = User.create(email: 'stahlschiff@web.de', password: 'password', password_confirmation: 'password')
+user_1 = User.create(email: 'user_1@example.de', password: 'password', password_confirmation: 'password')
+user_2 = User.create(email: 'user_2@example.de', password: 'password', password_confirmation: 'password')
 
 dat_backhus = Company.create(name: 'Dat Backhus')
 miss_doener = Company.create(name: 'Miss Döner')
@@ -43,10 +44,10 @@ bonus_card_3 = Card.create( name: 'Bonuskarte Döner',
                             exploited: false,
                             company: miss_doener)
 
-vendor_1 = Vendor.create( user: user,
+vendor_1 = Vendor.create( user: user_1,
                           company: dat_backhus)
 
-vendor_2 = Vendor.create( user: user,
+vendor_2 = Vendor.create( user: user_1,
                           company: miss_doener)
 
 
