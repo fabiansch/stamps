@@ -16,8 +16,8 @@
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.count %></td>
-        <td><%= transaction.card %></td>
-        <td><%= transaction.user %></td>
+        <td><%= transaction.card.company.name + ' | | ' + transaction.card.name %></td>
+        <td><%= transaction.user.email %></td>
         <td><%= link_to 'Show', transaction %></td>
         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
