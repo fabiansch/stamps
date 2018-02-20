@@ -1,26 +1,28 @@
-<h1>Home</h1>
+<div class="center jumbotron">
 
-<table>
-  <thead>
-    <tr>
-      <th>Company</th>
-      <th>Cardname</th>
-      <th>Stamps</th>
-      <th>Exploited</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% current_user.cards.each do |card| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= card.company.name %></td>
-        <td><%= card.name %></td>
-        <td><%= card.stamps.where(user: current_user).count %> /  <%= card.stamps_count %></td>
-        <td><%= card.exploited %></td>
+        <th>Company</th>
+        <th>Cardname</th>
+        <th>Stamps</th>
+        <th>Exploited</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% current_user.cards.each do |card| %>
+        <tr>
+          <td><%= card.company.name %></td>
+          <td><%= card.name %></td>
+          <td><%= card.stamps.where(user: current_user).count %> /  <%= card.stamps_count %></td>
+          <td><%= card.exploited %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
 
 <%= link_to "Signout", destroy_user_session_path, method: :delete %>

@@ -15,6 +15,12 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    # @companies = Set.new
+    # current_user.vendors.each do |vendor|
+    #   @companies.add vendor.company
+    # end
+    @cards = Card.all
+    @users = User.all
   end
 
   # GET /transactions/1/edit
@@ -25,6 +31,7 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @cards = Card.all
 
     @transaction.count.times do
       Stamp.create(card: @transaction.card, user: @transaction.user)

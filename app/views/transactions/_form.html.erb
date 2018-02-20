@@ -18,12 +18,20 @@
 
   <div class="field">
     <%= form.label :card_id %>
-    <%= form.text_field :card_id, id: :transaction_card_id %>
+    <%= form.select :card_id do %>
+      <% @cards.each do |c| %>
+        <%= content_tag :option, c.company.name + ' | ' + c.name, value: c.id %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :transaction_user_id %>
+    <%= form.select :user_id do %>
+      <% @users.each do |u| %>
+        <%= content_tag :option, u.email, value: u.id %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="actions">

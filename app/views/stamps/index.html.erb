@@ -5,7 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Company</th>
       <th>Card</th>
+      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +15,9 @@
   <tbody>
     <% @stamps.each do |stamp| %>
       <tr>
-        <td><%= stamp.card %></td>
+        <td><%= stamp.card.company.name %></td>
+        <td><%= stamp.card.name %></td>
+        <td><%= stamp.user.email %></td>
         <td><%= link_to 'Show', stamp %></td>
         <td><%= link_to 'Edit', edit_stamp_path(stamp) %></td>
         <td><%= link_to 'Destroy', stamp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
