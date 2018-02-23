@@ -16,7 +16,7 @@
         <tr>
           <td><%= card.company.name %></td>
           <td><%= card.name %></td>
-          <td><%= card.stamps.where(user: current_user).count %> /  <%= card.stamps_count %></td>
+          <td><%= card.stampings.where(user: current_user).count %> /  <%= card.stamps_count %></td>
           <td><%= card.exploited %></td>
         </tr>
       <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215014022) do
+ActiveRecord::Schema.define(version: 20180221004421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,23 +44,27 @@ ActiveRecord::Schema.define(version: 20180215014022) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "stamps", force: :cascade do |t|
-    t.bigint "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["card_id"], name: "index_stamps_on_card_id"
-    t.index ["user_id"], name: "index_stamps_on_user_id"
-  end
-
-  create_table "transactions", force: :cascade do |t|
+  create_table "stampings", force: :cascade do |t|
     t.integer "count"
     t.bigint "card_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_transactions_on_card_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
+    t.bigint "vendor_id", null: false
+    t.bigint "address_id", null: false
+    t.index ["address_id"], name: "index_stampings_on_address_id"
+    t.index ["card_id"], name: "index_stampings_on_card_id"
+    t.index ["user_id"], name: "index_stampings_on_user_id"
+    t.index ["vendor_id"], name: "index_stampings_on_vendor_id"
+  end
+
+  create_table "stamps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "stamping_id", null: false
+    t.bigint "user_id"
+    t.bigint "card_id"
+    t.index ["stamping_id"], name: "index_stamps_on_stamping_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,10 +98,11 @@ ActiveRecord::Schema.define(version: 20180215014022) do
 
   add_foreign_key "addresses", "companies"
   add_foreign_key "cards", "companies"
-  add_foreign_key "stamps", "cards"
-  add_foreign_key "stamps", "users"
-  add_foreign_key "transactions", "cards"
-  add_foreign_key "transactions", "users"
+  add_foreign_key "stampings", "addresses"
+  add_foreign_key "stampings", "cards"
+  add_foreign_key "stampings", "users"
+  add_foreign_key "stampings", "vendors"
+  add_foreign_key "stamps", "stampings"
   add_foreign_key "vendors", "companies"
   add_foreign_key "vendors", "users"
 end

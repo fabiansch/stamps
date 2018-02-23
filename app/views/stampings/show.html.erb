@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @stamping.count %>
+</p>
+
+<p>
+  <strong>Card:</strong>
+  <%= @stamping.card.company.name + ' | ' + @stamping.card.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @stamping.user.email %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @stamping.vendor.user.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @stamping.address.city + ' | ' +  @stamping.address.street %>
+</p>
+
+<%= link_to 'Edit', edit_stamping_path(@stamping) %> |
+<%= link_to 'Back', stampings_path %>

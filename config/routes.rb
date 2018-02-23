@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :stamps
-  resources :transactions
+  resources :stampings
   resources :vendors
   resources :cards
   resources :addresses
