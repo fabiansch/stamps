@@ -15,6 +15,8 @@ class VendorsController < ApplicationController
   # GET /vendors/new
   def new
     @vendor = Vendor.new
+    @companies = Company.all
+    @users = User.all
   end
 
   # GET /vendors/1/edit
