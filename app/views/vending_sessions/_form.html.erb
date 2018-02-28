@@ -1,6 +1,6 @@
 <%= form_with(model: stamping, local: true) do |form| %>
   <% if stamping.errors.any? %>
-    <div id="errćr_explanation">
+    <div id="error_explanation">
       <h2><%= pluralize(stamping.errors.count, "error") %> prohibited this stamping from being saved:</h2>
 
       <ul>
@@ -21,6 +21,15 @@
     <%= form.select :card_id do %>
       <% @cards.each do |c| %>
         <%= content_tag :option, c.company.name + ' | ' + c.name, value: c.id %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address_id %>
+    <%= form.select :address_id do %>
+      <% @addresses.each do |a| %>
+        <%= content_tag :option, a.company.name + ' | ' + a.street, value: a.id %>
       <% end %>
     <% end %>
   </div>

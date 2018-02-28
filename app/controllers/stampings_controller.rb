@@ -14,14 +14,16 @@ class StampingsController < ApplicationController
 
   # GET /stampings/new
   def new
+    if session[:vending_session_address].nil?
+      session[:return_to] ||= request.original_fullpath
+      redirect_to vending_session_new_path
+    else
     @stamping = Stamping.new
-    # @companies = Set.new
-    # current_user.vendors.each do |vendor|
-    #   @companies.add vendor.company
-    # end
-    @cards = Card.all
+    address = Address.find( session[:vending_session_address] )
+
+    @cards = Card.where(company_id: address.company)
     @users = User.all
-    @addresses = Address.all
+    end
   end
 
   # GET /stampings/1/edit
@@ -31,10 +33,9 @@ class StampingsController < ApplicationController
   # POST /stampings
   # POST /stampings.json
   def create
-    @stamping = Stamping.new(stamping_params)
+    @stamping = Stamping.new(stamping_params.merge(address_id: session[:vending_session_address]))
     @cards = Card.all
     @users = User.all
-    @addresses = Address.all
 
     @stamping.vendor = Vendor.where( ["company_id = ? and user_id = ?",
                                         @stamping.card.company,
@@ -89,6 +90,6 @@ class StampingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stamping_params
-      params.require(:stamping).permit(:count, :card_id, :user_id, :address_id)
+      params.require(:stamping).permit(:count, :card_id, :user_id)
     end
 end

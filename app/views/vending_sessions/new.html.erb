@@ -1,0 +1,13 @@
+<h1>New vending session</h1>
+
+<%= form_tag(vending_sessions_path, method: 'post') do %>
+  <div class="field">
+    <%= label_tag :address_id %>
+    <%= select_tag :address_id, options_for_select( @addresses.collect {
+      |x| [x.company.name + ' | ' + x.street, x.id] } ) %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
