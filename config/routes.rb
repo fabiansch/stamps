@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root to: "pages#home"
 
   resources :stamps
   resources :stampings
@@ -9,6 +8,15 @@ Rails.application.routes.draw do
   resources :companies
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+
+  root to: "pages#home"
+
+  namespace :api, defaults: { format: :json } do
+    scope :v1 do
+      mount_devise_token_auth_for "User", at: "auth", skip: [:omniauth_callbacks]
+      get 'home', to: "pages#home"
+    end
+  end
 
   get 'vending_session/new', to: 'vending_sessions#new'
   post 'vending_sessions', to: 'vending_sessions#create'

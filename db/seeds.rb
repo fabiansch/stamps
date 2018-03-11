@@ -1,6 +1,7 @@
 
-user_1 = User.create(email: 'user_1@example.de', password: 'password', password_confirmation: 'password')
-user_2 = User.create(email: 'user_2@example.de', password: 'password', password_confirmation: 'password')
+user_1 = User.create(email: 'user_1@example.de', password: 'password', password_confirmation: 'password', confirmed_at: Time.now)
+user_2 = User.create(email: 'user_2@example.de', password: 'password', password_confirmation: 'password', confirmed_at: Time.now)
+user_3 = User.create(email: 'user_3@example.de', password: 'password', password_confirmation: 'password', confirmed_at: Time.now)
 
 dat_backhus = Company.create(name: 'Dat Backhus')
 miss_doener = Company.create(name: 'Miss Döner')
@@ -47,7 +48,7 @@ bonus_card_3 = Card.create( name: 'Bonuskarte Döner',
 vendor_1 = Vendor.create( user: user_1,
                           company: dat_backhus)
 
-vendor_2 = Vendor.create( user: user_1,
+vendor_2 = Vendor.create( user: user_2,
                           company: miss_doener)
 
 
