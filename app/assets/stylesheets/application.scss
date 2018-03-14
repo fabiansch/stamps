@@ -1,5 +1,12 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
+
+
+
 @import "bootstrap";
+
+.navbar-custom {
+  padding: 0rem 0rem;
+}
 
 $footer-height: 40px;
 
