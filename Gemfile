@@ -21,7 +21,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'twitter'
-gem 'bootstrap', '4.0.0.alpha6'
+gem 'bootstrap', '~> 4.0'
 gem 'jquery-rails'
 
 

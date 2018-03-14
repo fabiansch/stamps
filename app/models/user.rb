@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   devise :omniauthable
 
+  before_validation do
+    self.uid = email if uid.blank?
+  end
+
 
   has_many :vendors, dependent: :destroy
   has_many :stampings

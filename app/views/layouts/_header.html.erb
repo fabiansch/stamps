@@ -1,46 +1,48 @@
 <header>
-  <nav class="navbar navbar-toggleable-md navbar-light bg-primary fixed-top">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+    <%= link_to 'Stamps', root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <%= link_to 'Stamps', root_path, class: "navbar-brand" %>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= 'active' if current_page?(root_path) %>">
           <%= link_to root_path, class: "nav-link" do %>
               Home <span class="sr-only">(current)</span>
           <% end %>
         </li>
       <% if user_signed_in? and not current_user.vendors.empty? %>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(new_stamping_path) or current_page?(vending_session_new_path) %>">
           <%= link_to 'Generate stamps', new_stamping_path, class: "nav-link" %>
         </li>
       <% end %>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(addresses_path) %>">
           <%= link_to 'Addresses', addresses_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(cards_path) %>">
           <%= link_to 'Cards', cards_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(companies_path) %>">
           <%= link_to 'Companies', companies_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(stamps_path) %>">
           <%= link_to 'Stamps', stamps_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(stampings_path) %>">
           <%= link_to 'Stampings', stampings_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <%= 'active' if current_page?(vendors_path) %>">
           <%= link_to 'Vendors', vendors_path, class: "nav-link" %>
         </li>
         <% if user_signed_in? %>
             <li class="nav-item"><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %> </li>
         <% else %>
-            <li class="nav-item"><%= link_to "Sign up", new_user_registration_path, class: "nav-link" %> </li>
-            <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %> </li>
+            <li class="nav-item <%= 'active' if current_page?(new_user_registration_path) %>"><%= link_to "Sign up", new_user_registration_path, class: "nav-link" %> </li>
+            <li class="nav-item <%= 'active' if current_page?(new_user_session_path) %>"><%= link_to "Login", new_user_session_path, class: "nav-link" %> </li>
         <% end %>
       </ul>
     </div>
+  </div>
   </nav>
 </header>
