@@ -3,6 +3,12 @@ user_1 = User.create(email: 'user_1@example.de', password: 'password', password_
 user_2 = User.create(email: 'user_2@example.de', password: 'password', password_confirmation: 'password')
 user_3 = User.create(email: 'user_3@example.de', password: 'password', password_confirmation: 'password')
 
+User.each do |user|
+  user.reload
+  user.tokens = nil
+  user.save
+end
+
 dat_backhus = Company.create(name: 'Dat Backhus')
 miss_doener = Company.create(name: 'Miss Döner')
 
