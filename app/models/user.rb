@@ -10,6 +10,9 @@ class User < ApplicationRecord
   devise :omniauthable
 
   before_validation do
+    puts "USER::before_validation uid is #{ uid.blank? ? "blank" : "not blank"}"
+    puts email.inspect
+
     self.uid = email if uid.blank?
   end
 
