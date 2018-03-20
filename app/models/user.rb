@@ -5,13 +5,16 @@ class User < ApplicationRecord
           :recoverable, :rememberable, :trackable, :validatable,
           :omniauthable, :omniauth_providers => [:twitter]
 
+  before_validation do
+    puts "USER::before_validation uid is #{ uid.blank? ? "blank" : "not blank"}"
+    puts email.inspect
+
+    self.uid = email if uid.blank?
+  end
+
   include DeviseTokenAuth::Concerns::User
 
   devise :omniauthable
-
-  before_validation do
-    self.uid = email if uid.blank?
-  end
 
 
   has_many :vendors, dependent: :destroy

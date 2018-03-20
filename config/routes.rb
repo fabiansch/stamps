@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     scope :v1 do
       mount_devise_token_auth_for "User", at: "auth", skip: [:omniauth_callbacks]
-      get 'home', to: "pages#home"
+      resources :stampings
+      get  'home', to: "pages#home"
+      get  'vending_session/new', to: 'vending_sessions#new'
+      post 'vending_sessions', to: 'vending_sessions#create'
     end
   end
 
