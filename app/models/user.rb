@@ -12,6 +12,8 @@ class User < ApplicationRecord
     self.uid = email if uid.blank?
   end
 
+  attr_reader :is_vendor
+
   include DeviseTokenAuth::Concerns::User
 
   devise :omniauthable
@@ -29,6 +31,14 @@ class User < ApplicationRecord
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
       end
+  end
+
+  def is_vendor
+    return self.vendors.length > 0;
+  end
+
+  def as_json(options={})
+    super(options).merge( {is_vendor: is_vendor} )
   end
 
 end
