@@ -3,5 +3,5 @@ class Stamping < ApplicationRecord
   belongs_to :user
   belongs_to :vendor
   belongs_to :address
-  has_many :stamps
+  has_many :stamps, dependent: :destroy
 end

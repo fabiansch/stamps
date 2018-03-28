@@ -41,6 +41,18 @@ class StampingsController < ApplicationController
                                         @stamping.card.company,
                                         current_user]).first
 
+    if @stamping.count == -101
+      Stamping.where(["card_id = ? and user_id = ?",
+                                        @stamping.card_id,
+                                        @stamping.user_id]).each do |s|
+        s.destroy
+      end
+
+      redirect_to new_stamping_path, notice: 'Card was deleted successfully.'
+
+      return
+    end
+
     @stamping.count.times do
       Stamp.create( card: @stamping.card,
                     user: @stamping.user,
