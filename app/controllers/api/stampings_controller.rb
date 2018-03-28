@@ -35,7 +35,7 @@ class Api::StampingsController < Api::ApplicationController
     stamping.vendor = Vendor.where( ["company_id = ? and user_id = ?",
                                         stamping.card.company,
                                         current_user]).first
-    if stamping.count == -101
+    if stamping.count == -1
       Stamping.where(["card_id = ? and user_id = ?",
                                         stamping.card_id,
                                         stamping.user_id]).each do |s|
