@@ -35,21 +35,30 @@ class Api::StampingsController < Api::ApplicationController
     stamping.vendor = Vendor.where( ["company_id = ? and user_id = ?",
                                         stamping.card.company,
                                         current_user]).first
-    if stamping.count == -1
-      Stamping.where(["card_id = ? and user_id = ?",
-                                        stamping.card_id,
-                                        stamping.user_id]).each do |s|
-        s.destroy
-      end
-      return
-    end
-
     stamping.save
 
-    stamping.count.times do
-      Stamp.create( card: stamping.card,
-                    user: stamping.user,
-                    stamping: stamping )
+    if stamping.count < 0
+      stamps_to_delete_count = stamping.count.abs * stamping.card.stamps_count
+      stamps = Stamp.where([ "card_id = ? and user_id = ?",
+                             stamping.card_id,
+                             stamping.user_id])
+      if stamps.count >= stamps_to_delete_count
+        stamps.order(:created_at)
+              .last(stamps_to_delete_count)
+              .each do |s|
+          s.destroy
+        end
+      else
+        render json: { error: 'You want to delete #{stamping.count.abs} cards,
+                               but user has only #{stamps.count} stamps' },
+               status: :bad_request
+      end
+    else
+      stamping.count.times do
+        Stamp.create( card: stamping.card,
+                      user: stamping.user,
+                      stamping: stamping )
+      end
     end
   end
 
