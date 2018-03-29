@@ -49,8 +49,8 @@ class Api::StampingsController < Api::ApplicationController
           s.destroy
         end
       else
-        render json: { error: 'You want to delete #{stamping.count.abs} cards,
-                               but user has only #{stamps.count} stamps' },
+        render json: { error: "You want to delete #{stamping.count.abs} cards, \
+                               but user has only #{stamps.count} stamps." },
                status: :bad_request
       end
     else
